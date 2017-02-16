@@ -37,12 +37,14 @@ if (process.env.NODE_ENV !== 'test') app.use(logger);
 /*
  * MODULE WIRING
  */
-const dbFactory = require('./db');
 const AuthServiceFactory = require('./services/auth.service');
 const AuthControllerFactory = require('./controllers/auth.controller');
 
-const User = require('./models/user.model')
-const authService = new AuthServiceFactory(User);
+const userFactory = require('./factories/user.factory');
+const UserRepositoryFactory = require('./repositories/user.repository');
+const userModel = require('./models/user.model');
+const userRepository = new UserRepositoryFactory(userModel, userFactory);
+const authService = new AuthServiceFactory(userRepository);
 const authController = new AuthControllerFactory(authService);
 
 /*

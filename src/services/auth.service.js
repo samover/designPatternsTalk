@@ -9,22 +9,22 @@
 'use strict';
 
 class AuthService {
-    constructor(UserModel) {
-        this.User = UserModel;
+    constructor(userRepository) {
+        this.userRepository = userRepository;
     }
 
     login(username, password) {
-        return this.User.findOne({ name: username })
+        return this.userRepository.findByName(username)
             .then((user) => {
-                if(!user || user.password !== password) throw new Error('Login failed');
-                return Promise.resolve({ token: user.token });
+                if(!user || user.getPassword() !== password) throw new Error('Login failed');
+                return Promise.resolve({ token: user.getToken() });
             })
             .catch((err) => Promise.reject(err));
     }
 
     checkToken(token) {
-        return this.User.findOne({ token })
-            .then((user) => Promise.resolve({ username: user.name }))
+        return this.userRepository.findByToken(token)
+            .then((user) => Promise.resolve({ username: user.getName() }))
             .catch(() => Promise.reject(new Error('Invalid token')));
     }
 }
