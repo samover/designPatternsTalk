@@ -8,20 +8,25 @@
 
 'use strict';
 
-const db = require('../db');
-const User = require('../models/user.model');
+class AuthService {
+    constructor(UserModel) {
+        this.User = UserModel;
+    }
 
-exports.login = function(username, password) {
-    return User.findOne({ name: username })
-        .then((user) => {
-            if(!user || user.password !== password) throw new Error('Login failed');
-            return Promise.resolve({ token: user.token });
-        })
-        .catch((err) => Promise.reject(err));
-};
+    login(username, password) {
+        return this.User.findOne({ name: username })
+            .then((user) => {
+                if(!user || user.password !== password) throw new Error('Login failed');
+                return Promise.resolve({ token: user.token });
+            })
+            .catch((err) => Promise.reject(err));
+    }
 
-exports.checkToken = function(token) {
-    return User.findOne({ token })
-        .then((user) => Promise.resolve({ username: user.name }))
-        .catch(() => Promise.reject(new Error('Invalid token')));
-};
+    checkToken(token) {
+        return this.User.findOne({ token })
+            .then((user) => Promise.resolve({ username: user.name }))
+            .catch(() => Promise.reject(new Error('Invalid token')));
+    }
+}
+
+module.exports = exports = AuthService;

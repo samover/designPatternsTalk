@@ -9,6 +9,7 @@
 'use strict';
 
 const authService = require('../services/auth.service');
+const User = require('../models/user.model');
 
 exports.login = function(req, res, next) {
     return authService.login(req.body.name, req.body.password)

@@ -8,13 +8,19 @@
 
 'use strict';
 
-const authService = require('../../src/services/auth.service');
+const AuthService = require('../../src/services/auth.service');
 
 const testUser = {
-    name: 'sam',
-    password: 'test',
+    name: 'testUser',
+    password: 'secret',
     token: 'access_token',
 };
+
+const UserModel = {
+    findOne: () => Promise.resolve(testUser),
+}
+
+const authService = new AuthService(UserModel);
 
 describe('services/auth.service', () => {
     describe('#login', () => {
