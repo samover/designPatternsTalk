@@ -12,16 +12,16 @@ const db = require('../db');
 const User = require('../models/user.model');
 
 exports.login = function(username, password) {
-    return User.find({ name: username })
+    return User.findOne({ name: username })
         .then((user) => {
-            if(user.password === password) return Promise.resolve();
-            throw new Error('Login failed');
+            if(!user || user.password !== password) throw new Error('Login failed');
+            return Promise.resolve({ token: user.token });
         })
         .catch((err) => Promise.reject(err));
 };
 
 exports.checkToken = function(token) {
-    return User.find({ token })
-        .then((user) => 'Valid token')
+    return User.findOne({ token })
+        .then((user) => Promise.resolve({ username: user.name }))
         .catch(() => Promise.reject(new Error('Invalid token')));
 };

@@ -11,13 +11,13 @@
 const authService = require('../services/auth.service');
 
 exports.login = function(req, res, next) {
-    return authService.login(req.body.username, req.body.password)
-        .then(() => res.sendStatus(200))
-        .catch(() => res.sendStatus(403))
+    return authService.login(req.body.name, req.body.password)
+        .then((token) => res.send(token))
+        .catch((err) => next(err));
 };
 
 exports.checkToken = function(req, res, next) {
     return authService.checkToken(req.query.token)
-        .then(() => res.sendStatus(200))
+        .then((userObject) => res.send({ ok: true, user: userObject }))
         .catch(() => res.sendStatus(403))
 };
