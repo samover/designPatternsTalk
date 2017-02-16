@@ -1,0 +1,40 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_PATH=$NODE_PATH:./lib node index.js",
+    "test": "NODE_ENV=test NODE_PATH=$NODE_PATH:./lib node node_modules/mocha/bin/mocha --sort"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "dotenv": "^4.0.0",
+    "express": "^4.14.1",
+    "factory-girl": "^4.2.0",
+    "helmet": "^3.4.0",
+    "level": "^1.6.0",
+    "level-sublevel": "^6.6.1",
+    "mongodb": "^2.2.24",
+    "mongoose": "^4.8.3",
+    "morgan": "^1.8.0",
+    "pg": "^6.1.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.30.2",
+    "sequelize-cli": "^2.5.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "faker": "^3.1.0",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7",
+    "sinon-chai": "^2.8.0",
+    "supertest": "^3.0.0",
+    "supertest-as-promised": "^4.0.2"
+  },
+  "engines": {
+    "node": "6.9.x",
+    "npm": "3.10.x"
+  }
+}
