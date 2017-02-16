@@ -35,13 +35,22 @@ app.use(bodyParser);
 if (process.env.NODE_ENV !== 'test') app.use(logger);
 
 /*
+ * MODULE WIRING
+ */
+const dbFactory = require('./db');
+const AuthServiceFactory = require('./services/auth.service');
+const AuthControllerFactory = require('./controllers/auth.controller');
+
+const User = require('./models/user.model')
+const authService = new AuthServiceFactory(User);
+const authController = new AuthControllerFactory(authService);
+
+/*
  * ROUTE DECLARATIONS
  */
 
-const authController = require('./controllers/auth.controller');
-
-app.get('/checkToken', authController.checkToken);
-app.post('/login', authController.login);
+app.get('/checkToken', (req, res, next) => authController.checkToken(req, res, next));
+app.post('/login', (req, res, next) => authController.login(req, res, next));
 
 // Catch all unknown routes.
 app.all('*', (req, res, next) => res.sendStatus(404));
