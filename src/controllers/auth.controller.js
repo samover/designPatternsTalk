@@ -19,5 +19,5 @@ exports.login = function(req, res, next) {
 exports.checkToken = function(req, res, next) {
     return authService.checkToken(req.query.token)
         .then((userObject) => res.send({ ok: true, user: userObject }))
-        .catch(() => res.sendStatus(403))
+        .catch(() => next(err));
 };
