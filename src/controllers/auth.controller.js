@@ -22,7 +22,7 @@ class AuthController {
     checkToken(req, res, next) {
         return this.authService.checkToken(req.query.token)
             .then((userObject) => res.send({ ok: true, user: userObject }))
-            .catch(() => res.sendStatus(403))
+            .catch(() => next(err));
     }
 }
 
