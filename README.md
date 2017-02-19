@@ -29,7 +29,7 @@ This branch implements basic DI and wires up the modules at the highest level. C
 
 Implementation of `Repository`  and `Factory` pattern. Database specific syntax is now abstracted behind a repository and the structure of the domain object is decoupled from the data structure.
 
-![schema 3](/images/dependencyInversion.png?raw=true)
+![schema 3](/images/furtherAbstraction.png?raw=true)
 
 ## what else?
 
