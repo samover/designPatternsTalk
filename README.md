@@ -24,7 +24,6 @@ This branch implements basic DI and wires up the modules at the highest level. C
 ![schema 2](/images/dependencyInjection.png?raw=true)
 
 ### [dependencyInversion](https://github.com/samover/designPatternsTalk/tree/dependencyInversion)
->>>>>>> ee15d78... Update README.md
 
 Implementation of `Repository`  and `Factory` pattern. Database specific syntax is now abstracted behind a repository and the structure of the domain object is decoupled from the data structure.
 
